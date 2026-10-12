@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.29)
+cmake_minimum_required(VERSION 3.30)
 
 set(KF_VERSION "6.30.0") # handled by release scripts
 project(Sonnet VERSION ${KF_VERSION})
@@ -27,10 +27,11 @@ include(ECMDeprecationSettings)
 include(ECMPoQmTools)
 include(CMakeDependentOption)
 include(ECMGenerateQDoc)
+include(ECMInstalledLibraryCheck)
 
 set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
 
-set(REQUIRED_QT_VERSION 6.9.0)
+set(REQUIRED_QT_VERSION 6.10.0)
 option(SONNET_USE_WIDGETS "Build components using Qt6Widgets" ON)
 option(SONNET_USE_QML "Build components using Qt6Quick" ON)
 option(SONNET_NO_BACKENDS "Do not fail when no backends are built (to be used for cross-build host tooling)" OFF)
@@ -62,15 +63,12 @@ ecm_set_disabled_deprecation_versions(
     QT 6.11.0
 )
 
-if (NOT BUILD_SHARED_LIBS)
-    add_definitions(-DSONNET_STATIC)
-endif()
-
 add_subdirectory(data)
 add_subdirectory(src)
 
 if (BUILD_TESTING)
      add_subdirectory(autotests)
+     add_subdirectory(tests)
 endif()
 
 cmake_dependent_option(BUILD_EXAMPLES "Whether to build the examples" OFF "SONNET_USE_WIDGETS" OFF)
