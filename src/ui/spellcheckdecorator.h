@@ -25,7 +25,7 @@ class Highlighter;
 /*!
  * \class Sonnet::SpellCheckDecorator
  * \inheaderfile Sonnet/SpellCheckDecorator
- * \inmodule KF6Sonnet
+ * \inmodule SonnetUi
  *
  * \brief Connects a Sonnet::Highlighter to a QTextEdit extending the context menu
  * of the text edit with spell check suggestions.
